@@ -35,6 +35,7 @@ import org.codehaus.gmaven.mojo.GroovyMojo
  * jTemp Maven2 Groovy Mojo.
  *
  * @goal generate
+ * @phase generate-sources
  */
 class JTempMojo extends GroovyMojo
 {
