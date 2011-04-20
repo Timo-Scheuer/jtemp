@@ -82,7 +82,6 @@ class JTempMojo extends GroovyMojo
 		def target_dirs = [new File("${project.basedir}/target/generated-sources"), new File("${project.basedir}/target/generated-test-sources")]
 	
         log.info("Executing the jTemp templating engine.")
-
 		for (int i=0; i<source_dirs.size(); i++) {
 		    File jtempdir = new File(source_dirs[i], JTEMP_SOURCES)
 
@@ -97,6 +96,9 @@ class JTempMojo extends GroovyMojo
 		    }
 		}
 		log.info("Templated code generation complete.")
+		
+		project.addCompileSourceRoot( target_dirs[0].getAbsolutePath() );
+		project.addTestCompileSourceRoot( target_dirs[1].getAbsolutePath() );
     }
 
 	void apply(File jtempfile, File jtempdir, File javadir) {
