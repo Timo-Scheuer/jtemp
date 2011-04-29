@@ -69,14 +69,6 @@ class JTempMojo extends GroovyMojo
 	    BYTE:WRAPPERS[4],
 	    SHORT:WRAPPERS[5]
 	]
-	
-	
-    /**
-     * The hello message to display.
-     *
-     * @parameter expression="${message}" default-value="Hello World"
-     */
-    String message
     
     void execute() {
 		def source_dirs = [new File("${project.basedir}/src/main"), new File("${project.basedir}/src/test")]
