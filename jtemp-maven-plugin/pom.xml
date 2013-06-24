@@ -4,7 +4,7 @@
 	<groupId>uk.ac.soton.ecs.jsh2</groupId>
 	<artifactId>jtemp-maven-plugin</artifactId>
 	<name>jTemp Maven Plugin</name>
-	<version>1.0</version>
+	<version>1.1</version>
 	
 	<inceptionYear>2011</inceptionYear>
 	
@@ -86,10 +86,10 @@
 		</plugins>
 	</build>
 	<distributionManagement>
-	    <repository>
-	      <id>octopussy</id>
-	      <name>Octopussy Maven Releases Repository</name>
-	      <url>http://octopussy.ecs.soton.ac.uk/m2/releases</url>
-	    </repository>
+		<repository>
+			<id>openimaj-releases</id>
+			<name>OpenIMAJ Maven Releases Repository</name>
+			<url>http://maven.ecs.soton.ac.uk/content/repositories/openimaj-releases/</url>
+		</repository>
 	 </distributionManagement>
 </project>

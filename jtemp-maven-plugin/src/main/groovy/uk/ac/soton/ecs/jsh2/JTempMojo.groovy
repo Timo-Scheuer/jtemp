@@ -100,36 +100,86 @@ class JTempMojo extends GroovyMojo
 	    String code = jtempfile.text
 	    Closure mapperfcn = getMapper(code)
 	    List<String> types = getTypes(code) as List
+	    List<String> fileTypes = getTypes(jtempfile.name) as List
+	    
+	    if (types as Set != fileTypes as Set && !fileTypes.isEmpty()) 
+	        throw new Exception("Internal types (${types}) do not match filename types (${fileTypes})");
+	    
 	    if (mapperfcn) code = removeMapper(code)
 
-	    def wc = []
-	    types.each { wc << WRAPPERS }
-	    def combos = wc.combinations()
+        if (!fileTypes.isEmpty()) {
+            def wc = []
+    	    types.each { wc << WRAPPERS }
+    	    def combos = wc.combinations()
+    	    
+            //output goes in separate files
+    	    combos.each { combo ->
+    	        def map = [:]
+    	        combo.eachWithIndex { obj, i ->
+    	            map[types[i]] = obj
+    	            map[types[i].toUpperCase()] = obj
+    	        }
 
-	    combos.each { combo ->
-	        def map = [:]
-	        combo.eachWithIndex { obj, i ->
-	            map[types[i]] = obj
-	            map[types[i].toUpperCase()] = obj
-	        }
+    	        if (mapperfcn == null || mapperfcn(map)) {
+    	            String newcode = new String(code)
+    	            String newrelDir = new String(relDir)
 
-	        if (mapperfcn == null || mapperfcn(map)) {
-	            String newcode = new String(code)
-	            String newrelDir = new String(relDir)
+    	            types.each {
+    	                WrapperInfo wi = map[it]
 
-	            types.each {
-	                WrapperInfo wi = map[it]
+    	                newcode = process(newcode, it, wi)
+    	                newrelDir = process(newrelDir, it, wi)
+    	            }
+    	            File javafile = new File(javadir, newrelDir.replace(JTEMP_EXTENSION, JAVA_EXTENSION))
+    	            javafile.parentFile.mkdirs()
+    	            javafile.write(String.format(HEADER, jtempfile.toString().replace("\\","/")) + newcode)
+    	        }
+    	    }
+        } else {
+            //output goes in one file. Code is split by the marker (/*-- .* --*/) and only blocks with types are transformed.
+            def codeblocks = splitCode(code)
+            def newcodeblocks = []
+            
+            codeblocks.each { block ->
+                types = getTypes(block) as List;
+                
+                if (types.isEmpty()) {
+                    newcodeblocks << block
+                } else {
+                    def wc = []
+            	    types.each { wc << WRAPPERS }
+            	    def combos = wc.combinations()
+        	    
+                    combos.each { combo ->
+            	        def map = [:]
+            	        combo.eachWithIndex { obj, i ->
+            	            map[types[i]] = obj
+            	            map[types[i].toUpperCase()] = obj
+            	        }
 
-	                newcode = process(newcode, it, wi)
-	                newrelDir = process(newrelDir, it, wi)
-	            }
-	            File javafile = new File(javadir, newrelDir.replace(JTEMP_EXTENSION, JAVA_EXTENSION))
-	            javafile.parentFile.mkdirs()
-	            javafile.write(String.format(HEADER, jtempfile.toString().replace("\\","/")) + newcode)
-	        }
-	    }
+            	        if (mapperfcn == null || mapperfcn(map)) {
+            	            String newcode = new String(block)
+
+            	            types.each {
+            	                WrapperInfo wi = map[it]
+
+            	                newcode = process(newcode, it, wi)
+            	            }
+            	            newcodeblocks << newcode
+            	        }
+            	    }
+        	    }
+    	    }
+    	    
+    	    File javafile = new File(javadir, relDir.replace(JTEMP_EXTENSION, JAVA_EXTENSION))
+            javafile.parentFile.mkdirs()
+            javafile.write(String.format(HEADER, jtempfile.toString().replace("\\","/")) + newcodeblocks.join("\n"))
+        }
 	}
 
+    def splitCode(String code) {
+        return code.split("(?s)[/][*][-]{2}.*?[-]{2}[*][/].*?[\n]")
+    }
 
 	Set<String> getTypes(String input) {
 	    Set<String> type = new HashSet<String>()
@@ -143,7 +193,7 @@ class JTempMojo extends GroovyMojo
 	}
 
 	Closure getMapper(String input) {
-	    def matcher = input =~ "(?s)/[*]{3}(.*)[*]{3}/"
+	    def matcher = input =~ "(?s)/[*]{4}(.*)[*]{4}/"
 
 	    if (matcher) {
 	        return compile(matcher[0][1])
