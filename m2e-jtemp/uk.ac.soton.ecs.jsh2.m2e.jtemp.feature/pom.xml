@@ -1,0 +1,74 @@
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+	<modelVersion>4.0.0</modelVersion>
+	
+  	<artifactId>uk.ac.soton.ecs.jsh2.m2e.jtemp.feature</artifactId>
+	<name>jtemp connector for m2e - feature</name>
+	<description>Manages jtemp configuration for Eclipse</description>
+	<packaging>eclipse-feature</packaging>
+
+	<parent>
+		<groupId>uk.ac.soton.ecs.jsh2.m2e.jtemp</groupId>
+		<artifactId>uk.ac.soton.ecs.jsh2.m2e.jtemp.parent</artifactId>
+		<version>1.2.0</version>
+		<relativePath>../pom.xml</relativePath>
+	</parent>
+	
+	<dependencies>
+		<dependency>
+			<groupId>uk.ac.soton.ecs.jsh2.m2e.jtemp</groupId>
+			<artifactId>uk.ac.soton.ecs.jsh2.m2e.jtemp</artifactId>
+			<version>1.2.0</version>
+			<type>pom</type>
+		</dependency>
+	</dependencies>
+	
+	<build>
+    <plugins>
+      <plugin>
+        <groupId>org.eclipse.tycho</groupId>
+        <artifactId>tycho-packaging-plugin</artifactId>
+        <version>${tycho-version}</version>
+        <configuration>
+          <deployableFeature>true</deployableFeature>
+        </configuration>
+      </plugin>
+      <plugin>
+        <groupId>org.eclipse.tycho</groupId>
+        <artifactId>tycho-p2-plugin</artifactId>
+        <version>${tycho-version}</version>
+        <executions>
+          <execution>
+            <id>categorization</id>
+            <phase>package</phase>
+            <goals>
+              <goal>category-p2-metadata</goal>
+            </goals>
+          </execution>
+        </executions>
+        <configuration>
+          <metadataRepositoryName>jtemp connector for m2e</metadataRepositoryName>
+          <artifactRepositoryName>jtemp connector for m2e</artifactRepositoryName>
+        </configuration>
+      </plugin>
+      <plugin>
+        <groupId>org.apache.maven.plugins</groupId>
+        <artifactId>maven-assembly-plugin</artifactId>
+        <configuration>
+          <descriptors>
+            <descriptor>src/main/assembly/assembly.xml</descriptor>
+          </descriptors>
+        </configuration>
+        <executions>
+          <execution>
+            <id>make-assembly</id> 
+            <phase>package</phase> 
+            <goals>
+              <goal>single</goal> 
+            </goals>
+          </execution>
+        </executions>
+      </plugin>
+    </plugins>
+  </build>
+</project>

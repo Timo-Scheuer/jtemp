@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<feature
+      id="uk.ac.soton.ecs.jsh2.m2e.jtemp.feature"
+      label="jtemp m2e connector"
+      version="1.2.0"
+      plugin="uk.ac.soton.ecs.jsh2.m2e.jtemp">
+
+   <description>
+      Manages jtemp configuration for Eclipse
+   </description>
+
+   <copyright>
+      %copyright
+   </copyright>
+
+   <license url="%licenseURL">
+      %license
+   </license>
+	<!--
+   <requires>
+      <import feature="org.eclipse.platform" version="3.7.0" match="greaterOrEqual"/>
+      <import feature="org.eclipse.m2e.feature" version="1.1.0" match="greaterOrEqual"/>
+   </requires>
+   -->
+   <plugin
+         id="uk.ac.soton.ecs.jsh2.m2e.jtemp"
+         download-size="0"
+         install-size="0"
+         version="1.2.0"
+         unpack="false"/>
+
+</feature>

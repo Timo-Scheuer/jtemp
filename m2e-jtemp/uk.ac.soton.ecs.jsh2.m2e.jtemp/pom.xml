@@ -1,0 +1,14 @@
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+	<modelVersion>4.0.0</modelVersion>
+	<artifactId>uk.ac.soton.ecs.jsh2.m2e.jtemp</artifactId>
+	<name>jtemp connector for m2e</name>
+	<description>Manages jtemp configuration for m2e</description>
+	<parent>
+		<groupId>uk.ac.soton.ecs.jsh2.m2e.jtemp</groupId>
+		<artifactId>uk.ac.soton.ecs.jsh2.m2e.jtemp.parent</artifactId>
+		<version>1.2.0</version>
+		<relativePath>../pom.xml</relativePath>
+	</parent>
+	<packaging>eclipse-plugin</packaging>
+</project>

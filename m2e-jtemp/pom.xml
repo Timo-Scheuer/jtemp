@@ -1,0 +1,53 @@
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+	<modelVersion>4.0.0</modelVersion>
+	<groupId>uk.ac.soton.ecs.jsh2.m2e.jtemp</groupId>
+	<artifactId>uk.ac.soton.ecs.jsh2.m2e.jtemp.parent</artifactId>
+	<version>1.2.0</version>
+	<packaging>pom</packaging>
+	<name>jtemp-m2e Connector - Parent</name>
+
+	<modules>
+		<module>uk.ac.soton.ecs.jsh2.m2e.jtemp</module>
+		<module>uk.ac.soton.ecs.jsh2.m2e.jtemp.feature</module>
+	</modules>
+
+	<properties>
+		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+		<tycho-version>0.21.0</tycho-version>
+	</properties>
+
+	<repositories>
+		<repository>
+			<id>eclipse</id>
+			<url>http://download.eclipse.org/releases/juno</url>
+			<layout>p2</layout>
+		</repository>
+		<repository>
+			<id>m2e</id>
+			<url>http://download.eclipse.org/technology/m2e/releases/1.1</url>
+			<layout>p2</layout>
+		</repository>
+	</repositories>
+
+	<build>
+		<plugins>
+			<plugin>
+				<groupId>org.eclipse.tycho</groupId>
+				<artifactId>tycho-maven-plugin</artifactId>
+				<version>${tycho-version}</version>
+				<extensions>true</extensions>
+			</plugin>
+		</plugins>
+
+		<pluginManagement>
+			<plugins>
+				<plugin>
+					<groupId>org.apache.maven.plugins</groupId>
+					<artifactId>maven-resources-plugin</artifactId>
+					<version>2.4.3</version>
+				</plugin>
+			</plugins>
+		</pluginManagement>
+	</build>
+</project>

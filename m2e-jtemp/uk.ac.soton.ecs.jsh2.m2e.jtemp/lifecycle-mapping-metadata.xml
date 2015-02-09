@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<lifecycleMappingMetadata>
+  <pluginExecutions>
+    <pluginExecution>
+      <pluginExecutionFilter>
+      	<groupId>uk.ac.soton.ecs.jsh2</groupId>
+        <artifactId>jtemp-maven-plugin</artifactId>
+        <versionRange>[1.2,)</versionRange>
+        <goals>
+          <goal>process</goal>
+        </goals>
+        </pluginExecutionFilter>
+        <action>
+        <configurator>
+          <id>uk.ac.soton.ecs.jsh2.m2e.jtemp.Configurator</id>
+        </configurator>
+      </action>
+    </pluginExecution>
+  </pluginExecutions>
+</lifecycleMappingMetadata>
