@@ -7,10 +7,10 @@
         <artifactId>jtemp-maven-plugin</artifactId>
         <versionRange>[1.2,)</versionRange>
         <goals>
-          <goal>process</goal>
+          <goal>generate</goal>
         </goals>
-        </pluginExecutionFilter>
-        <action>
+      </pluginExecutionFilter>
+      <action>
         <configurator>
           <id>uk.ac.soton.ecs.jsh2.m2e.jtemp.Configurator</id>
         </configurator>
