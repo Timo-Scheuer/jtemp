@@ -7,7 +7,7 @@
 	<parent>
 		<groupId>uk.ac.soton.ecs.jsh2.m2e.jtemp</groupId>
 		<artifactId>uk.ac.soton.ecs.jsh2.m2e.jtemp.parent</artifactId>
-		<version>1.2.0</version>
+		<version>1.2.1</version>
 		<relativePath>../pom.xml</relativePath>
 	</parent>
 	<packaging>eclipse-plugin</packaging>

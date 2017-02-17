@@ -1,8 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <site>
-   <category-def name="m2e-jtemp" label="jtemp connnector for m2e"/>
-   
    <feature id="uk.ac.soton.ecs.jsh2.m2e.jtemp.feature">
       <category name="m2e-jtemp"/>
    </feature>
+   <category-def name="m2e-jtemp" label="jtemp connnector for m2e"/>
 </site>

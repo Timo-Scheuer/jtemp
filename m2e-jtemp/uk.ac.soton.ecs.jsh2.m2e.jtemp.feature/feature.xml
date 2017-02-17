@@ -2,7 +2,7 @@
 <feature
       id="uk.ac.soton.ecs.jsh2.m2e.jtemp.feature"
       label="jtemp m2e connector"
-      version="1.2.0"
+      version="1.2.1"
       plugin="uk.ac.soton.ecs.jsh2.m2e.jtemp">
 
    <description>
@@ -26,7 +26,7 @@
          id="uk.ac.soton.ecs.jsh2.m2e.jtemp"
          download-size="0"
          install-size="0"
-         version="1.2.0"
+         version="1.2.1"
          unpack="false"/>
 
 </feature>
