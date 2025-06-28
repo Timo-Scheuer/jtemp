@@ -1,0 +1,37 @@
+
+# /jtemp-maven-plugin/
+/jtemp-maven-plugin/target
+/jtemp-maven-plugin/.DS_Store
+/jtemp-maven-plugin/.project
+/jtemp-maven-plugin/.classpath
+/jtemp-maven-plugin/.settings
+
+# /m2e-jtemp/
+/m2e-jtemp/# exclude target directories
+/m2e-jtemp/target
+/m2e-jtemp/# eclipse project files and directories
+/m2e-jtemp/.classpath
+/m2e-jtemp/.project
+/m2e-jtemp/.settings
+/m2e-jtemp/# other Folders
+/m2e-jtemp/test-output
+
+# /m2e-jtemp/uk.ac.soton.ecs.jsh2.m2e.jtemp/
+/m2e-jtemp/uk.ac.soton.ecs.jsh2.m2e.jtemp/# exclude target directories
+/m2e-jtemp/uk.ac.soton.ecs.jsh2.m2e.jtemp/target
+/m2e-jtemp/uk.ac.soton.ecs.jsh2.m2e.jtemp/# eclipse project files and directories
+/m2e-jtemp/uk.ac.soton.ecs.jsh2.m2e.jtemp/.classpath
+/m2e-jtemp/uk.ac.soton.ecs.jsh2.m2e.jtemp/.project
+/m2e-jtemp/uk.ac.soton.ecs.jsh2.m2e.jtemp/.settings
+/m2e-jtemp/uk.ac.soton.ecs.jsh2.m2e.jtemp/# other Folders
+/m2e-jtemp/uk.ac.soton.ecs.jsh2.m2e.jtemp/test-output
+
+# /m2e-jtemp/uk.ac.soton.ecs.jsh2.m2e.jtemp.feature/
+/m2e-jtemp/uk.ac.soton.ecs.jsh2.m2e.jtemp.feature/# exclude target directories
+/m2e-jtemp/uk.ac.soton.ecs.jsh2.m2e.jtemp.feature/target
+/m2e-jtemp/uk.ac.soton.ecs.jsh2.m2e.jtemp.feature/# eclipse project files and directories
+/m2e-jtemp/uk.ac.soton.ecs.jsh2.m2e.jtemp.feature/.classpath
+/m2e-jtemp/uk.ac.soton.ecs.jsh2.m2e.jtemp.feature/.project
+/m2e-jtemp/uk.ac.soton.ecs.jsh2.m2e.jtemp.feature/.settings
+/m2e-jtemp/uk.ac.soton.ecs.jsh2.m2e.jtemp.feature/# other Folders
+/m2e-jtemp/uk.ac.soton.ecs.jsh2.m2e.jtemp.feature/test-output
