@@ -9,36 +9,79 @@
 	<inceptionYear>2011</inceptionYear>
 	
 	<packaging>maven-plugin</packaging>
+
+	<properties>
+		<groovy.version>4.0.27</groovy.version>
+		<junit.jupiter.version>5.11.4</junit.jupiter.version>
+		<maven-compiler-plugin.version>3.11.0</maven-compiler-plugin.version> <!-- Or latest -->
+		<gmavenplus-plugin.version>4.0.1</gmavenplus-plugin.version>
+	</properties>
+
 	<dependencies>
+		<!-- Maven plugin development -->
 		<dependency>
-			<groupId>org.codehaus.gmaven</groupId>
-			<artifactId>gmaven-mojo</artifactId>
-			<version>1.3</version>
-			<exclusions>
-				<exclusion>
-					<groupId>org.codehaus.groovy</groupId>
-					<artifactId>groovy-all-minimal</artifactId>
-				</exclusion>
-			</exclusions>
+			<groupId>org.apache.maven</groupId>
+			<artifactId>maven-plugin-api</artifactId>
+			<version>3.9.6</version> <!-- Or a version compatible with your Maven target -->
+			<scope>provided</scope>
 		</dependency>
 		<dependency>
-			<groupId>junit</groupId>
-			<artifactId>junit</artifactId>
-			<version>3.8.2</version>
+			<groupId>org.apache.maven</groupId>
+			<artifactId>maven-core</artifactId>
+			<version>3.9.6</version>
+			<scope>provided</scope>
+		</dependency>
+		<dependency>
+			<groupId>org.apache.maven.plugin-tools</groupId>
+			<artifactId>maven-plugin-annotations</artifactId>
+			<version>3.13.1</version> <!-- Or a version compatible with your Maven target -->
+			<scope>provided</scope>
+		</dependency>
+
+		<!-- Groovy -->
+		<dependency>
+			<groupId>org.apache.groovy</groupId>
+			<artifactId>groovy</artifactId>
+			<version>${groovy.version}</version>
+		</dependency>
+		<dependency>
+			<groupId>org.apache.groovy</groupId>
+			<artifactId>groovy-templates</artifactId>
+			<version>${groovy.version}</version>
+		</dependency>
+		<!-- Add other groovy modules if needed, like groovy-xml, groovy-json etc.
+			 groovy-all is a pom, so better to specify needed modules.
+			 For a plugin, groovy (core) and groovy-templates might be enough. -->
+
+		<!-- Test -->
+		<dependency>
+			<groupId>org.junit.jupiter</groupId>
+			<artifactId>junit-jupiter-api</artifactId>
+			<version>${junit.jupiter.version}</version>
 			<scope>test</scope>
 		</dependency>
 		<dependency>
-			<groupId>org.codehaus.groovy</groupId>
-			<artifactId>groovy-all</artifactId>
-			<version>1.6.9</version>
+			<groupId>org.junit.jupiter</groupId>
+			<artifactId>junit-jupiter-engine</artifactId>
+			<version>${junit.jupiter.version}</version>
+			<scope>test</scope>
 		</dependency>
 	</dependencies>
 	<build>
 		<plugins>
 			<plugin>
+				<groupId>org.apache.maven.plugins</groupId>
+				<artifactId>maven-compiler-plugin</artifactId>
+				<version>${maven-compiler-plugin.version}</version>
+				<configuration>
+					<source>1.8</source> <!-- Groovy 4 requires Java 8+ -->
+					<target>1.8</target>
+				</configuration>
+			</plugin>
+			<plugin>
 				<groupId>com.mycila.maven-license-plugin</groupId>
 				<artifactId>maven-license-plugin</artifactId>
-				<version>1.9.0</version>
+				<version>1.9.0</version> <!-- Consider updating this plugin too -->
 				<configuration>
 					<header>src/etc/header.txt</header>
 					<strictCheck>true</strictCheck>
@@ -48,41 +91,51 @@
 				</configuration>
 			</plugin>
 			<plugin>
-				<groupId>org.codehaus.gmaven</groupId>
-				<artifactId>gmaven-plugin</artifactId>
-				<version>1.3</version>
-				<configuration>
-					<providerSelection>1.6</providerSelection>
-				</configuration>
+				<groupId>org.codehaus.gmavenplus</groupId>
+				<artifactId>gmavenplus-plugin</artifactId>
+				<version>${gmavenplus-plugin.version}</version>
 				<executions>
 					<execution>
 						<goals>
-							<goal>generateStubs</goal>
+							<goal>addSources</goal>
+							<goal>addTestSources</goal>
 							<goal>compile</goal>
-							<goal>generateTestStubs</goal>
-							<goal>testCompile</goal>
+							<goal>compileTests</goal>
 						</goals>
 					</execution>
 				</executions>
-				<dependencies>
-					<dependency>
-						<groupId>org.codehaus.gmaven.runtime</groupId>
-						<artifactId>gmaven-runtime-1.5</artifactId>
-						<version>1.3</version>
-						<exclusions>
-							<exclusion>
-								<groupId>org.codehaus.groovy</groupId>
-								<artifactId>groovy-all-minimal</artifactId>
-							</exclusion>
-						</exclusions>
-					</dependency>
-					<dependency>
-						<groupId>org.codehaus.groovy</groupId>
-						<artifactId>groovy-all</artifactId>
-						<version>1.6.9</version>
-					</dependency>
-				</dependencies>
 			</plugin>
+			<plugin>
+				<groupId>org.apache.maven.plugins</groupId>
+				<artifactId>maven-surefire-plugin</artifactId>
+				<version>3.2.5</version> <!-- Or latest -->
+				<configuration>
+					<argLine>--add-opens java.base/java.lang=ALL-UNNAMED</argLine> <!-- May be needed for Groovy 4+ on newer JDKs with JUnit 5 -->
+				</configuration>
+			</plugin>
+			<plugin>
+                 <groupId>org.apache.maven.plugins</groupId>
+                 <artifactId>maven-plugin-plugin</artifactId>
+                 <version>3.13.1</version> <!-- Use a recent version -->
+                 <configuration>
+                     <goalPrefix>jtemp</goalPrefix>
+                     <skipErrorNoDescriptorsFound>true</skipErrorNoDescriptorsFound>
+                 </configuration>
+                 <executions>
+                     <execution>
+                         <id>mojo-descriptor</id>
+                         <goals>
+                             <goal>descriptor</goal>
+                         </goals>
+                     </execution>
+                     <execution>
+                        <id>help-goal</id>
+                        <goals>
+                            <goal>helpmojo</goal>
+                        </goals>
+                    </execution>
+                 </executions>
+            </plugin>
 		</plugins>
 	</build>
 	<distributionManagement>
