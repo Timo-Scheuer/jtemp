@@ -11,6 +11,7 @@
 	<packaging>maven-plugin</packaging>
 
 	<properties>
+		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
 		<groovy.version>4.0.27</groovy.version>
 		<junit.jupiter.version>5.11.4</junit.jupiter.version>
 		<maven-compiler-plugin.version>3.11.0</maven-compiler-plugin.version> <!-- Or latest -->
