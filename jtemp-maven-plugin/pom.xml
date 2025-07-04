@@ -15,7 +15,7 @@
 		<gmavenplus-plugin.version>4.0.1</gmavenplus-plugin.version>
 		<groovy.version>4.0.27</groovy.version>
 		<junit.jupiter.version>5.11.4</junit.jupiter.version>
-		<maven-compiler-plugin.version>3.11.0</maven-compiler-plugin.version> <!-- Or latest -->
+		<maven-compiler-plugin.version>3.11.0</maven-compiler-plugin.version>
 	</properties>
 
 	<dependencies>
@@ -23,7 +23,7 @@
 		<dependency>
 			<groupId>org.apache.maven</groupId>
 			<artifactId>maven-plugin-api</artifactId>
-			<version>3.9.6</version> <!-- Or a version compatible with your Maven target -->
+			<version>3.9.6</version>
 			<scope>provided</scope>
 		</dependency>
 		<dependency>
@@ -35,7 +35,7 @@
 		<dependency>
 			<groupId>org.apache.maven.plugin-tools</groupId>
 			<artifactId>maven-plugin-annotations</artifactId>
-			<version>3.13.1</version> <!-- Or a version compatible with your Maven target -->
+			<version>3.13.1</version> 
 			<scope>provided</scope>
 		</dependency>
 
@@ -75,7 +75,7 @@
 				<artifactId>maven-compiler-plugin</artifactId>
 				<version>${maven-compiler-plugin.version}</version>
 				<configuration>
-					<release>11</release> <!-- Use <release> instead of source/target, Java 11 as a modern baseline -->
+					<release>11</release>
 				</configuration>
 			</plugin>
 			<plugin>
@@ -108,15 +108,15 @@
 			<plugin>
 				<groupId>org.apache.maven.plugins</groupId>
 				<artifactId>maven-surefire-plugin</artifactId>
-				<version>3.2.5</version> <!-- Or latest -->
+				<version>3.2.5</version>
 				<configuration>
-					<argLine>--add-opens java.base/java.lang=ALL-UNNAMED</argLine> <!-- May be needed for Groovy 4+ on newer JDKs with JUnit 5 -->
+					<argLine>--add-opens java.base/java.lang=ALL-UNNAMED</argLine>
 				</configuration>
 			</plugin>
 			<plugin>
                  <groupId>org.apache.maven.plugins</groupId>
                  <artifactId>maven-plugin-plugin</artifactId>
-                 <version>3.13.1</version> <!-- Use a recent version -->
+                 <version>3.13.1</version>
                  <configuration>
                      <goalPrefix>jtemp</goalPrefix>
                      <skipErrorNoDescriptorsFound>true</skipErrorNoDescriptorsFound>
